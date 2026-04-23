@@ -1,58 +1,173 @@
-/* Fase 2: Estilizado Base (CSS) */
-body {
- margin: 0;
- font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
- background-color: #f4f7f6;
- color: #333;
- line-height: 1.6;
+/* ============================================
+   FASE 2: ESTILIZADO BASE (CSS)
+   CSS es la "capa estética" del sitio web
+   ============================================ */
+
+/* CONCEPTO CLAVE: Estructura de una Regla CSS
+   Selector { Propiedad: Valor; }
+   
+   Ejemplo:
+   body { color: #333; }
+   ^     ^      ^      ^
+   |     |      |      └─ VALOR (resultado deseado)
+   |     |      └──────── PROPIEDAD (qué cambiar)
+   |     └─────────────── PROPIEDAD: VALOR
+   └───────────────────── SELECTOR (a qué elemento aplicar)
+*/
+
+/* ============================================
+   1. RESET BÁSICO: Eliminar márgenes por defecto
+   ============================================ */
+
+/* Definir variables CSS para la paleta de colores */
+:root {
+ --color-primario: #2c3e50;    /* Azul oscuro profesional */
+ --color-secundario: #34495e;  /* Azul más claro (hover) */
+ --color-fondo: #f4f7f6;       /* Gris muy claro */
+ --color-texto: #333;          /* Gris oscuro */
+ --color-texto-blanco: #ffffff;
+ --fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ --espaciado-base: 1rem;
 }
 
+/* Reset para body: elimina márgenes por defecto */
+body {
+ margin: 0;           /* Elimina margen por defecto */
+ padding: 0;          /* Elimina padding por defecto */
+ font-family: var(--fuente-principal);
+ background-color: var(--color-fondo);
+ color: var(--color-texto);
+ line-height: 1.6;    /* Espaciado entre líneas */
+}
+
+/* Reset para encabezados: elimina márgenes por defecto */
+h1, h2, h3, h4, h5, h6 {
+ margin: 0;           /* Elimina margen por defecto */
+ padding: 0;          /* Elimina padding por defecto */
+}
+
+/* Reset para listas: elimina estilos por defecto */
+ul, ol {
+ margin: 0;           /* Elimina margen por defecto */
+ padding: 0;          /* Elimina padding por defecto */
+}
+
+/* ============================================
+   2. TIPOGRAFÍA: Fuentes y estilos de texto
+   ============================================ */
+
+/* Encabezado principal (H1) */
+h1 {
+ font-size: 2.5rem;   /* Tamaño de fuente */
+ font-weight: 700;    /* Grosor: 700 = bold */
+ letter-spacing: 1px; /* Espaciado entre letras */
+ margin-bottom: 0.5rem;
+}
+
+/* Encabezados secundarios (H2) */
+h2 {
+ font-size: 1.8rem;
+ font-weight: 600;
+ margin-bottom: 1rem;
+ color: var(--color-primario);
+}
+
+/* Párrafos */
+p {
+ margin-bottom: 1rem;
+}
+
+/* ============================================
+   3. COLORES: Paleta profesional
+   ============================================ */
+
+/* Encabezado del sitio */
 header {
- background: #2c3e50;
- color: white;
+ background-color: var(--color-primario);  /* Selector: header, Propiedad: background-color, Valor: #2c3e50 */
+ color: var(--color-texto-blanco);
  text-align: center;
  padding: 2rem 0;
 }
 
-/* Fase 3: El Modelo de Caja (Box Model) */
+
+/* ============================================
+   FASE 3: EL MODELO DE CAJA (BOX MODEL)
+   margin, border, padding, content
+   ============================================ */
+
 .contenedor {
  width: 80%;
- margin: 20px auto; /* Centrado horizontal */
- background: white;
- padding: 30px;
- border-radius: 8px;
- box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+ max-width: 900px;
+ margin: 20px auto;  /* Centrado horizontal: margin automático */
+ background-color: var(--color-texto-blanco);
+ padding: 30px;      /* Espacio interno */
+ border-radius: 8px; /* Esquinas redondeadas */
+ box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Sombra suave */
 }
 
-/* Fase 4: Introducción a Flexbox (Diseño Moderno) */
+/* ============================================
+   FASE 4: INTRODUCCIÓN A FLEXBOX
+   Diseño flexible y responsivo
+   ============================================ */
+
 .habilidades {
- display: flex;
- justify-content: space-around;
+ display: flex;              /* Activa Flexbox */
+ justify-content: space-around; /* Distribuye espacios */
  list-style: none;
  padding: 0;
+ gap: 15px;                  /* Espacio entre items */
+ flex-wrap: wrap;            /* Permite envolver en móviles */
 }
 
-/* Estilo para botón de contacto */
+.habilidades li {
+ background-color: var(--color-primario);
+ color: var(--color-texto-blanco);
+ padding: 10px 20px;
+ border-radius: 5px;
+ flex: 1;
+ min-width: 120px;
+ text-align: center;
+}
+
+/* ============================================
+   COMPONENTES INTERACTIVOS
+   ============================================ */
+
+/* Botón de contacto */
 .button {
  display: inline-block;
- background-color: #2c3e50;
- color: white;
+ background-color: var(--color-primario);
+ color: var(--color-texto-blanco);
  padding: 12px 30px;
  text-decoration: none;
  border-radius: 5px;
  margin-top: 15px;
  transition: background-color 0.3s ease;
+ font-weight: 600;
+ border: 2px solid var(--color-primario);
 }
 
 .button:hover {
- background-color: #34495e;
+ background-color: var(--color-secundario);
+ border-color: var(--color-secundario);
 }
 
-/* Footer */
+.button:active {
+ transform: scale(0.98);
+}
+
+/* ============================================
+   PIE DE PÁGINA (FOOTER)
+   ============================================ */
+
 footer {
- background-color: #2c3e50;
- color: white;
+ background-color: var(--color-primario);
+ color: var(--color-texto-blanco);
  text-align: center;
  padding: 20px 0;
  margin-top: 40px;
+}
+
+footer p {
+ margin: 0;
 }
