@@ -92,18 +92,73 @@ header {
 
 /* ============================================
    FASE 3: EL MODELO DE CAJA (BOX MODEL)
-   margin, border, padding, content
+   
+   CONCEPTO CRÍTICO: Cada elemento HTML es un rectángulo
+   con 4 capas desde adentro hacia afuera:
+   
+   ┌────────────────────────────────────┐
+   │         MARGIN (espacio externo)   │
+   │  ┌──────────────────────────────┐  │
+   │  │  BORDER (borde del elemento) │  │
+   │  │  ┌──────────────────────────┐│  │
+   │  │  │ PADDING (espacio interno)││  │
+   │  │  │ ┌────────────────────────┤│  │
+   │  │  │ │ CONTENT (contenido)    ││  │
+   │  │  │ │ "Hola, soy Joan"       ││  │
+   │  │  │ └────────────────────────┤│  │
+   │  │  └──────────────────────────┘│  │
+   │  └──────────────────────────────┘  │
+   └────────────────────────────────────┘
+   
+   PROPIEDADES DEL BOX MODEL:
+   - width/height: Tamaño del contenido
+   - padding: Espacio DENTRO del elemento (entre content y border)
+   - border: Línea alrededor del elemento
+   - margin: Espacio FUERA del elemento (entre border y otros elementos)
+   - box-sizing: Define si el ancho incluye padding/border
    ============================================ */
 
-.contenedor {
- width: 80%;
- max-width: 900px;
- margin: 20px auto;  /* Centrado horizontal: margin automático */
- background-color: var(--color-texto-blanco);
- padding: 30px;      /* Espacio interno */
- border-radius: 8px; /* Esquinas redondeadas */
- box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Sombra suave */
+/* Mostrar los bordes del box model (para entender) */
+* {
+ box-sizing: border-box;  /* Incluir padding en el ancho total */
 }
+
+/* Clase principal del contenido */
+.contenedor {
+ /* ──── DIMENSIONES ──── */
+ width: 80%;              /* Ancho del contenido: 80% del padre */
+ max-width: 900px;        /* Ancho máximo: 900px en pantallas grandes */
+ 
+ /* ──── MARGIN (Espacio Externo) ──── */
+ margin: 20px auto;       /* 20px arriba/abajo, auto izquierda/derecha (CENTRA horizontalmente) */
+ /* Desglosado: margin-top: 20px, margin-right: auto, margin-bottom: 20px, margin-left: auto */
+ 
+ /* ──── PADDING (Espacio Interno) ──── */
+ padding: 30px;           /* 30px en los 4 lados */
+ /* Espacio DENTRO del contenedor: entre el borde y el contenido */
+ 
+ /* ──── BACKGROUND Y BORDE ──── */
+ background-color: var(--color-texto-blanco);  /* Color de fondo blanco */
+ border: 1px solid #e0e0e0;                    /* Borde de 1px gris claro para visualizar */
+ border-radius: 8px;      /* Esquinas redondeadas: 8px */
+ 
+ /* ──── SOMBRA ──── */
+ box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Sombra: offset-x, offset-y, blur, color */
+}
+
+/* Explicación de Margin Auto - CENTRADO HORIZONTAL */
+/* Cuando usamos margin: 0 auto en un elemento con width definido:
+   - auto: Divide el espacio disponible equitativamente a izquierda y derecha
+   - Resultado: El elemento se centra horizontalmente
+   
+   Ejemplo:
+   Body: 1200px de ancho
+   .contenedor: 80% = 960px
+   Espacio disponible: 1200px - 960px = 240px
+   margin-left: auto = 120px
+   margin-right: auto = 120px
+   ¡Centrado perfecto!
+*/
 
 /* ============================================
    FASE 4: INTRODUCCIÓN A FLEXBOX
@@ -122,11 +177,34 @@ header {
 .habilidades li {
  background-color: var(--color-primario);
  color: var(--color-texto-blanco);
- padding: 10px 20px;
+ 
+ /* ──── PADDING (espacio interno) ──── */
+ padding: 10px 20px;   /* 10px arriba/abajo, 20px izquierda/derecha */
+ 
+ /* ──── MARGIN (espacio externo entre items) ──── */
+ margin: 5px;          /* 5px en todos los lados (espacio entre botones) */
+ 
  border-radius: 5px;
  flex: 1;
  min-width: 120px;
  text-align: center;
+ 
+ /* ──── TRANSICIÓN PARA VER BOX MODEL ──── */
+ transition: all 0.3s ease;
+}
+
+/* Demostración de cambios en el Box Model al hacer hover */
+.habilidades li:hover {
+ /* Aumentar padding para mostrar cómo crece el contenedor */
+ padding: 12px 24px;
+ 
+ /* Cambiar margin para mostrar espacio externo */
+ margin: 3px;
+ 
+ /* Cambiar escala para visualizar el contenedor */
+ transform: scale(1.05);
+ 
+ box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 /* ============================================
